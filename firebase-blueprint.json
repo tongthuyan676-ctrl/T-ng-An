@@ -1,0 +1,80 @@
+{
+  "entities": {
+    "EbookRegistration": {
+      "title": "Ebook Registration",
+      "description": "Information of visitors who registered to receive the Ebook",
+      "type": "object",
+      "properties": {
+        "fullName": { "type": "string" },
+        "email": { "type": "string" },
+        "phoneZalo": { "type": "string" },
+        "status": { "type": "string", "enum": ["Chưa thanh toán", "Đã thanh toán"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["fullName", "email", "phoneZalo"]
+    },
+    "CoachRegistration": {
+      "title": "Coach Registration",
+      "description": "Information of visitors who registered for 1-1 coaching consultation",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "phone": { "type": "string" },
+        "email": { "type": "string" },
+        "industry": { "type": "string" },
+        "biggestChallenge": { "type": "string" },
+        "message": { "type": "string" },
+        "status": { "type": "string", "enum": ["Chưa thanh toán", "Đã thanh toán"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["name", "phone", "email"]
+    },
+    "GiftRegistration": {
+      "title": "Gift Registration",
+      "description": "Information of visitors who registered to receive free gifts",
+      "type": "object",
+      "properties": {
+        "fullName": { "type": "string" },
+        "email": { "type": "string" },
+        "phoneZalo": { "type": "string" },
+        "selectedGift": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["fullName", "email", "phoneZalo", "selectedGift"]
+    },
+    "CourseRegistration": {
+      "title": "Course Registration",
+      "description": "Information of visitors who registered and paid for a course",
+      "type": "object",
+      "properties": {
+        "fullName": { "type": "string" },
+        "email": { "type": "string" },
+        "phoneZalo": { "type": "string" },
+        "courseId": { "type": "string" },
+        "courseTitle": { "type": "string" },
+        "price": { "type": "string" },
+        "status": { "type": "string", "enum": ["Chưa thanh toán", "Đã thanh toán"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["fullName", "email", "phoneZalo", "courseId", "courseTitle", "price"]
+    }
+  },
+  "firestore": {
+    "ebook_registrations/{registrationId}": {
+      "schema": "EbookRegistration",
+      "description": "Collection of Ebook registrations"
+    },
+    "coach_registrations/{registrationId}": {
+      "schema": "CoachRegistration",
+      "description": "Collection of 1-1 Coaching registrations"
+    },
+    "gift_registrations/{registrationId}": {
+      "schema": "GiftRegistration",
+      "description": "Collection of Free Gift registrations"
+    },
+    "course_registrations/{registrationId}": {
+      "schema": "CourseRegistration",
+      "description": "Collection of Course registrations"
+    }
+  }
+}

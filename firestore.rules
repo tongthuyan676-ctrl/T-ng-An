@@ -1,0 +1,39 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper function to check if the user is authenticated
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Ebook registrations
+    match /ebook_registrations/{registrationId} {
+      allow create: if true; // Public can create/register
+      allow read, update, delete: if isAuthenticated(); // Only logged-in admin can read/write
+    }
+
+    // Coach registrations
+    match /coach_registrations/{registrationId} {
+      allow create: if true; // Public can create/register
+      allow read, update, delete: if isAuthenticated(); // Only logged-in admin can read/write
+    }
+
+    // Gift registrations
+    match /gift_registrations/{registrationId} {
+      allow create: if true; // Public can create/register
+      allow read, update, delete: if isAuthenticated(); // Only logged-in admin can read/write
+    }
+
+    // Corporate registrations
+    match /corp_registrations/{registrationId} {
+      allow create: if true; // Public can create/register
+      allow read, update, delete: if isAuthenticated(); // Only logged-in admin can read/write
+    }
+
+    // Course registrations
+    match /course_registrations/{registrationId} {
+      allow create: if true; // Public can create/register
+      allow read, update, delete: if isAuthenticated(); // Only logged-in admin can read/write
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "name": "Tống An - Xây Kênh Online Bền Vững",
+  "description": "Website landing page hoàn chỉnh giới thiệu thương hiệu cá nhân Tống An, đồng hành xây kênh online, rèn chữ đẹp, ứng dụng AI và phễu marketing bền vững.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
