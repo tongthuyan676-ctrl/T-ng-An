@@ -202,7 +202,7 @@ export default function Gifts() {
                       Chị hãy bấm nút xanh bên dưới để <strong>tham gia nhóm Zalo nhận link trực tiếp</strong> của bộ tài liệu và cùng thảo luận hỏi đáp trực tiếp với An nhé!
                     </p>
                     <a
-                      href="https://zalo.me/g/kkgpy7a04itz12cfceo5"
+                      href="https://zalo.me/g/fsuvf5aok5adpz7krl1b"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-full inline-flex items-center justify-center gap-2 px-5 py-4 bg-[#0068FF] hover:bg-[#0056D2] text-white font-black text-sm rounded-xl shadow-md transition-all cursor-pointer hover:scale-[1.02] active:scale-[0.98] animate-pulse"

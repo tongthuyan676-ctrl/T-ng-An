@@ -4,7 +4,7 @@
  */
 
 import { useState, useEffect } from 'react';
-import { Gift, X } from 'lucide-react';
+import { BookOpen, X } from 'lucide-react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import VideoIntro from './components/VideoIntro';
@@ -18,11 +18,48 @@ import Courses from './components/Courses';
 import Enterprise from './components/Enterprise';
 import Footer from './components/Footer';
 import AdminDashboard from './components/AdminDashboard';
+import XayKenhPage from './components/XayKenhPage';
 
 export default function App() {
   const [isAdminOpen, setIsAdminOpen] = useState(false);
   const [showFloatingGift, setShowFloatingGift] = useState(false);
   const [isDismissed, setIsDismissed] = useState(false);
+  const [isXayKenhPage, setIsXayKenhPage] = useState(() => {
+    const rawPath = window.location.pathname.toLowerCase().replace(/^\/+|\/+$/g, '');
+    const rawHash = window.location.hash.toLowerCase().replace('#', '');
+    return rawPath === 'xay-kenh' || rawPath === 'xaykenh' || rawHash === 'xay-kenh' || rawHash === 'xaykenh';
+  });
+
+  useEffect(() => {
+    const handleLocationChange = () => {
+      const rawPath = window.location.pathname.toLowerCase().replace(/^\/+|\/+$/g, '');
+      const rawHash = window.location.hash.toLowerCase().replace('#', '');
+      if (rawPath === 'xay-kenh' || rawPath === 'xaykenh' || rawHash === 'xay-kenh' || rawHash === 'xaykenh') {
+        setIsXayKenhPage(true);
+      } else {
+        setIsXayKenhPage(false);
+      }
+    };
+
+    window.addEventListener('popstate', handleLocationChange);
+    window.addEventListener('hashchange', handleLocationChange);
+    return () => {
+      window.removeEventListener('popstate', handleLocationChange);
+      window.removeEventListener('hashchange', handleLocationChange);
+    };
+  }, []);
+
+  const navigateToXayKenh = () => {
+    window.history.pushState({}, '', '/xay-kenh');
+    setIsXayKenhPage(true);
+    window.scrollTo(0, 0);
+  };
+
+  const navigateToHome = () => {
+    window.history.pushState({}, '', '/');
+    setIsXayKenhPage(false);
+    window.scrollTo(0, 0);
+  };
 
   // Scroll handler to show the floating badge
   useEffect(() => {
@@ -40,9 +77,29 @@ export default function App() {
 
   // Smooth scroll helper with sticky header offset
   const scrollToSection = (sectionId: string) => {
+    if (sectionId === 'xay-kenh' || sectionId === 'xaykenh') {
+      navigateToXayKenh();
+      return;
+    }
+
+    if (isXayKenhPage) {
+      setIsXayKenhPage(false);
+      window.history.pushState({}, '', '/');
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          const headerOffset = 80;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.scrollY - headerOffset;
+          window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+        }
+      }, 100);
+      return;
+    }
+
     const element = document.getElementById(sectionId);
     if (element) {
-      const headerOffset = 80; // Sticky header height
+      const headerOffset = 80;
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.scrollY - headerOffset;
 
@@ -82,6 +139,10 @@ export default function App() {
       return () => clearTimeout(timer);
     }
   }, []);
+
+  if (isXayKenhPage) {
+    return <XayKenhPage onBackToHome={navigateToHome} />;
+  }
 
   return (
     <div className="min-h-screen bg-[#FCFAF7] text-[#2E2522] font-sans antialiased overflow-x-hidden selection:bg-[#C59B27]/30 selection:text-[#2E2522]">
@@ -129,18 +190,22 @@ export default function App() {
         <AdminDashboard onClose={() => setIsAdminOpen(false)} />
       )}
 
-      {/* Floating high-converting Gift Badge */}
+      {/* Floating high-converting Ebook 59K Badge */}
       {showFloatingGift && !isDismissed && (
         <div 
-          onClick={() => scrollToSection('qua-tang')}
-          className="fixed bottom-6 right-6 z-50 flex items-center gap-3 bg-[#A82222] text-white p-3 pr-4 rounded-2xl shadow-2xl border-2 border-white/30 animate-bounce cursor-pointer hover:scale-105 hover:bg-[#8B1A1A] transition-all max-w-[280px] sm:max-w-xs group"
+          onClick={() => scrollToSection('ebook')}
+          className="fixed bottom-6 right-6 z-50 flex items-center gap-3 bg-[#A82222] text-white p-3 pr-4 rounded-2xl shadow-2xl border-2 border-white/30 animate-bounce cursor-pointer hover:scale-105 hover:bg-[#8B1A1A] transition-all max-w-[310px] sm:max-w-xs group"
         >
           <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center shrink-0 shadow-inner group-hover:rotate-12 transition-transform">
-            <Gift className="w-5 h-5 text-white animate-pulse" />
+            <BookOpen className="w-5 h-5 text-white animate-pulse" />
           </div>
           <div className="flex-1 pr-1">
-            <p className="text-[9px] font-bold tracking-widest uppercase text-[#C59B27] leading-none mb-1">QUÀ TẶNG MIỄN PHÍ</p>
-            <h4 className="text-xs font-black leading-tight">Chỉ còn 12 suất bộ tài liệu trị giá 499K!</h4>
+            <p className="text-[9px] font-bold tracking-widest uppercase text-[#C59B27] leading-none mb-1">
+              ƯU ĐÃI ĐẶC BIỆT 59K
+            </p>
+            <h4 className="text-xs font-black leading-tight">
+              Nhận Ebook Vận Hành Doanh Nghiệp 1 Người (59K)
+            </h4>
           </div>
           <button
             onClick={(e) => {
@@ -148,7 +213,7 @@ export default function App() {
               setIsDismissed(true);
               setShowFloatingGift(false);
             }}
-            className="p-1 rounded-lg hover:bg-white/20 transition-colors text-white/70 hover:text-white shrink-0 self-start -mt-1 -mr-2"
+            className="p-1 rounded-lg hover:bg-white/20 transition-colors text-white/70 hover:text-white shrink-0 self-start -mt-1 -mr-2 cursor-pointer"
             title="Đóng thông báo"
           >
             <X className="w-3.5 h-3.5" />

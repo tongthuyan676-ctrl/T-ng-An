@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VẬN HÀNH DOANH NGHIỆP 1 NGƯỜI BẰNG AI - Coach Tống An</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #A82222;
+      --primary-dark: #7A1414;
+      --gold: #C59B27;
+      --gold-light: #FBF4E4;
+      --text-main: #2E2522;
+      --text-muted: #5C4D49;
+      --bg-page: #FCFAF7;
+      --border-color: #EADFC9;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Merriweather', serif;
+      color: var(--text-main);
+      background-color: #EFEBE4;
+      line-height: 1.8;
+      font-size: 15px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Fixed Top Action Bar (hidden when printing) */
+    .top-action-bar {
+      position: sticky;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(45, 42, 38, 0.95);
+      backdrop-filter: blur(8px);
+      color: white;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      z-index: 999;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .top-action-bar .brand-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .top-action-bar .badge {
+      background: var(--gold);
+      color: #000;
+      font-weight: 800;
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .top-action-bar h1 {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: #FFF;
+    }
+
+    .action-buttons {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s ease;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .btn-download {
+      background: var(--primary);
+      color: white;
+    }
+    .btn-download:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-sheets {
+      background: #0F9D58;
+      color: white;
+    }
+    .btn-sheets:hover {
+      background: #0B8043;
+    }
+
+    .btn-zalo {
+      background: #0068FF;
+      color: white;
+    }
+    .btn-zalo:hover {
+      background: #0052CC;
+    }
+
+    /* Book Presentation Container */
+    .book-container {
+      max-width: 860px;
+      margin: 30px auto 60px;
+      background: white;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+
+    /* Page Styling */
+    .book-page {
+      padding: 60px 60px 50px;
+      background: white;
+      position: relative;
+      border-bottom: 2px dashed var(--border-color);
+    }
+
+    /* Book Cover Page */
+    .cover-page {
+      background: linear-gradient(135deg, #1C0505 0%, #7A1414 45%, #2E2522 100%);
+      color: white;
+      min-height: 800px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 80px 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cover-page::before {
+      content: '';
+      position: absolute;
+      inset: 20px;
+      border: 2px solid rgba(197, 155, 39, 0.4);
+      border-radius: 8px;
+      pointer-events: none;
+    }
+
+    .cover-top .tagline {
+      font-family: 'Montserrat', sans-serif;
+      color: var(--gold);
+      text-transform: uppercase;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      margin-bottom: 12px;
+    }
+
+    .cover-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 38px;
+      font-weight: 900;
+      line-height: 1.25;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin: 30px 0;
+      color: #FFFFFF;
+    }
+
+    .cover-title span {
+      color: var(--gold);
+      display: block;
+      margin-top: 8px;
+    }
+
+    .cover-subtitle {
+      font-size: 15px;
+      color: #F3ECE0;
+      max-width: 560px;
+      margin: 0 auto;
+      font-style: italic;
+      line-height: 1.6;
+    }
+
+    .cover-bottom {
+      border-top: 1px solid rgba(197, 155, 39, 0.3);
+      padding-top: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-align: left;
+    }
+
+    .author-block h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 16px;
+      color: var(--gold);
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    .author-block p {
+      font-size: 12px;
+      color: #EADFC9;
+    }
+
+    /* Headings */
+    h2.chapter-header {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--primary);
+      text-transform: uppercase;
+      border-bottom: 2px solid var(--gold);
+      padding-bottom: 10px;
+      margin-bottom: 24px;
+      letter-spacing: 0.5px;
+    }
+
+    h3.section-header {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-top: 24px;
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+
+    h4.sub-header {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-top: 16px;
+      margin-bottom: 8px;
+    }
+
+    p {
+      margin-bottom: 16px;
+      text-align: justify;
+    }
+
+    ul, ol {
+      margin-bottom: 18px;
+      padding-left: 24px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    /* Callout & Prompt Boxes */
+    .callout {
+      background: var(--gold-light);
+      border-left: 4px solid var(--gold);
+      padding: 16px 20px;
+      border-radius: 6px;
+      margin: 20px 0;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .prompt-box {
+      background: #2D2A26;
+      color: #E6C665;
+      padding: 18px 22px;
+      border-radius: 8px;
+      margin: 20px 0;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 13px;
+      line-height: 1.6;
+      border: 1px solid #3D3833;
+    }
+
+    .prompt-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      color: #FFF;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Tables */
+    .table-wrapper {
+      margin: 20px 0;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    th, td {
+      border: 1px solid #D5C8B4;
+      padding: 10px 12px;
+      text-align: left;
+    }
+
+    th {
+      background: #F4EFE6;
+      color: var(--text-main);
+      font-weight: 700;
+    }
+
+    tr:nth-child(even) td {
+      background: #FAF7F2;
+    }
+
+    .page-number {
+      text-align: right;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      color: #8C7E7A;
+      margin-top: 30px;
+      border-top: 1px solid #EADFC9;
+      padding-top: 8px;
+    }
+
+    /* Print rules for saving as PDF */
+    @media print {
+      body {
+        background: white;
+        font-size: 12pt;
+      }
+      .top-action-bar {
+        display: none !important;
+      }
+      .book-container {
+        box-shadow: none;
+        margin: 0;
+        max-width: 100%;
+        border: none;
+        border-radius: 0;
+      }
+      .book-page {
+        page-break-after: always;
+        padding: 40px 30px;
+        border-bottom: none;
+      }
+      .cover-page {
+        min-height: 100vh;
+        page-break-after: always;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Sticky Navigation & Action Bar -->
+  <div class="top-action-bar">
+    <div class="brand-info">
+      <span class="badge">EBOOK FULL 38 TRANG</span>
+      <h1>VẬN HÀNH DOANH NGHIỆP 1 NGƯỜI BẰNG AI — Coach Tống An</h1>
+    </div>
+    <div class="action-buttons">
+      <button class="btn btn-download" onclick="window.print()">
+        🖨️ Lưu / In PDF Đầy Đủ
+      </button>
+      <a class="btn btn-sheets" href="https://docs.google.com/spreadsheets/d/1fdV5WQpuOzy6bXDy2eerwwpvZBdJbVpHOpsKwhAFHMw/edit?gid=2127812128#gid=2127812128" target="_blank">
+        📊 Mở File Google Sheets Master
+      </a>
+      <a class="btn btn-zalo" href="https://zalo.me/g/fsuvf5aok5adpz7krl1b" target="_blank">
+        💬 Nhóm Zalo Hỗ Trợ
+      </a>
+    </div>
+  </div>
+
+  <div class="book-container">
+    
+    <!-- PAGE 1: COVER -->
+    <div class="cover-page">
+      <div class="cover-top">
+        <div class="tagline">Ấn Phẩm Thực Chiến Độc Quyền</div>
+        <h1 class="cover-title">
+          VẬN HÀNH DOANH NGHIỆP<br />
+          <span>1 NGƯỜI BẰNG AI</span>
+        </h1>
+        <p class="cover-subtitle">
+          Giải pháp tự động hóa vận hành, xây dựng thương hiệu cá nhân và nhân bản doanh thu bền vững dành cho nhà bán hàng vật lý.
+        </p>
+      </div>
+
+      <div class="cover-bottom">
+        <div class="author-block">
+          <h4>TÁC GIẢ: COACH TỐNG AN</h4>
+          <p>Chuyên gia Đào tạo Con người & Cố vấn Phát triển Sự nghiệp</p>
+        </div>
+        <div style="font-family: 'Montserrat', sans-serif; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--gold); border: 1px solid var(--gold); padding: 6px 12px; border-radius: 6px;">
+          Solopreneur AI System
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 2: LỜI NÓI ĐẦU -->
+    <div class="book-page">
+      <h2 class="chapter-header">LỜI NÓI ĐẦU</h2>
+      <p>Chào bạn đến với cẩm nang thực chiến vận hành doanh nghiệp 1 người bằng AI dành riêng cho nhà bán hàng vật lý và xây dựng thương hiệu cá nhân.</p>
+      <p>Trong kỷ nguyên AI, quy mô doanh nghiệp không nằm ở số lượng nhân sự cồng kềnh, mà nằm ở tốc độ tự động hóa, tối ưu hóa hệ thống và sức mạnh định vị của chính bạn. Cuốn cẩm nang này sẽ đồng hành cùng bạn giải phóng thời gian và bứt phá doanh thu.</p>
+      
+      <div class="callout">
+        <strong>🌟 Thông điệp cốt lõi:</strong> Không làm việc bằng sức trâu, hãy làm việc bằng hệ thống. Quy mô doanh nghiệp hiện đại nằm ở năng lực điều phối đội ngũ trợ lý AI thông minh thay vì gồng gánh tất cả mọi khâu thủ công!
+      </div>
+
+      <h3 class="section-header">Mục lục Tổng quan</h3>
+      <ul>
+        <li><strong>Chương 1:</strong> Tổng quan Solopreneur & Sức mạnh AI trong kinh doanh vật lý.</li>
+        <li><strong>Chương 2:</strong> Xây dựng thương hiệu cá nhân để bán hàng vật lý bền vững.</li>
+        <li><strong>Chương 3:</strong> Bộ Prompt đỉnh cao cho E-commerce & Solopreneur (PRED Framework).</li>
+        <li><strong>Chương 4:</strong> Checklist 90 ngày hành động thực chiến từ Ngày 1 đến Ngày 90.</li>
+        <li><strong>Phụ lục:</strong> Biểu đồ phễu chuyển đổi & File Google Sheets Workspace 90-Day Master System.</li>
+      </ul>
+      <div class="page-number">Trang 2</div>
+    </div>
+
+    <!-- PAGE 3: CHƯƠNG 1 -->
+    <div class="book-page">
+      <h2 class="chapter-header">CHƯƠNG 1: TỔNG QUAN SOLOPRENEUR & SỨC MẠNH AI TRONG KINH DOANH VẬT LÝ</h2>
+      <h3 class="section-header">I. Tư duy nền tảng — Chuyển từ "Thợ làm thuê cho chính mình" sang "Nhà điều hành hệ thống"</h3>
+      <p><strong>1. Thực trạng của nhà kinh doanh vật lý đơn lẻ (Solopreneur):</strong></p>
+      <p>Hầu hết các chị em khi mới bắt đầu kinh doanh sản phẩm vật lý (quần áo, mỹ phẩm, đồ gia dụng, thực phẩm...) thường rơi vào cái bẫy "Tự làm tất cả mọi thứ" (Do-It-All Trap):</p>
+      <ul>
+        <li>Sáng nhập hàng, kiểm kho.</li>
+        <li>Trưa đóng gói, đi gửi bưu điện.</li>
+        <li>Chiều chụp ảnh sản phẩm, viết bài đăng Facebook, dựng video TikTok.</li>
+        <li>Tối mịt ngồi trả lời tin nhắn khách hàng, chốt đơn và đối soát dòng tiền.</li>
+      </ul>
+      <p><strong>👉 Hậu quả:</strong> Kiệt sức (Burnout), thời gian dành cho gia đình và bản thân không còn, nhưng doanh thu thì giậm chân tại chỗ vì quỹ thời gian một ngày chỉ có 24 tiếng.</p>
+
+      <h3 class="section-header">2. Định nghĩa Solopreneur trong kỷ nguyên AI</h3>
+      <p>Solopreneur không có nghĩa là bạn phải làm mọi việc bằng sức người. Solopreneur hiện đại là người làm chủ một doanh nghiệp tinh gọn, nơi:</p>
+      <ul>
+        <li>Bạn giữ vai trò <strong>Kiến trúc sư trưởng & Giám đốc chiến lược</strong>.</li>
+        <li>Toàn bộ các công việc tốn thời gian, lặp đi lặp lại được giao phó cho <strong>Hệ thống tự động hóa và Trợ lý AI</strong>.</li>
+      </ul>
+
+      <h3 class="section-header">3. Mục tiêu chuyển hóa</h3>
+      <ul>
+        <li>Giải phóng ít nhất <strong>80% thời gian chết</strong> cho các công việc thủ công.</li>
+        <li>Xây dựng tư duy vận hành: Không làm việc bằng sức trâu, hãy làm việc bằng hệ thống.</li>
+      </ul>
+      <div class="page-number">Trang 3</div>
+    </div>
+
+    <!-- PAGE 4: TIME AUDIT & ĐỘI NGŨ AI -->
+    <div class="book-page">
+      <h3 class="section-header">II. Kiểm toán thời gian cá nhân (Time Audit) và loại bỏ điểm nghẽn</h3>
+      <p>Trước khi muốn tối ưu hóa bằng công nghệ, bạn phải biết chính xác thời gian của mình đang bị "rò rỉ" ở đâu. Hãy thực hiện quy trình kiểm toán thời gian trong 3 bước:</p>
+      <p><strong>Bước 1: Nhật ký hành động 3 ngày liên tục</strong><br />
+      Ghi lại toàn bộ công việc kèm thời gian bắt đầu và kết thúc (08:00 - 09:30 chụp ảnh, 09:30 - 11:00 nghĩ caption, 14:00 - 16:00 đóng đơn...).</p>
+      
+      <p><strong>Bước 2: Phân loại công việc theo ma trận 3 nhóm (A - B - C)</strong></p>
+      <ul>
+        <li><strong>Nhóm A (Tạo ra tiền trực tiếp):</strong> Livestream, chốt đơn, tư vấn khách hàng VIP, đàm phán nhập hàng giá tốt. (Giữ lại và tối ưu).</li>
+        <li><strong>Nhóm B (Hỗ trợ vận hành):</strong> Đóng gói hàng hóa, in vận đơn, đối soát tiền bạc. (Tối ưu quy trình hoặc thuê ngoài bán thời gian).</li>
+        <li><strong>Nhóm C (Tiêu tốn thời gian, ít sinh tiền):</strong> Suy nghĩ ý tưởng content, chỉnh sửa từng cái ảnh thô, thiết kế banner, tìm kiếm hashtag... (Chuyển giao 100% cho AI).</li>
+      </ul>
+
+      <p><strong>Bước 3: Lập "Danh sách tử thần" cần cắt bỏ ngay</strong><br />
+      Khoanh tròn toàn bộ các công việc ở Nhóm C. Đây chính là những "điểm nghẽn" khiến doanh nghiệp của bạn mãi không lớn được. Từ hôm nay, bạn sẽ không tự làm những việc này bằng sức người nữa mà dùng AI.</p>
+
+      <h3 class="section-header">III. Thiết lập "Đội ngũ AI" ảo cho doanh nghiệp 1 người</h3>
+      <p>Thay vì tốn hàng chục triệu đồng thuê một đội ngũ nhân sự marketing cồng kềnh, bạn sẽ thiết lập ngay một "ban giám đốc ảo" bằng các công cụ AI sẵn có:</p>
+      <ol>
+        <li><strong>ChatGPT / Claude — Trưởng phòng Marketing & Sáng tạo Nội dung:</strong> Lên ý tưởng chiến lược, viết bài PR, kịch bản video ngắn, viết email chăm sóc khách hàng, trả lời tin nhắn.</li>
+        <li><strong>Canva AI — Giám đốc Thiết kế (Art Director):</strong> Thiết kế banner quảng cáo, poster khai giảng, ảnh ghép sản phẩm vật lý, tạo ảnh nền bắt mắt chỉ trong 30 giây.</li>
+        <li><strong>Notion AI — Thư ký Vận hành & Quản lý Kho:</strong> Quản lý danh mục sản phẩm, theo dõi lịch đăng bài, lưu trữ quy trình SOP, quản lý khách hàng và đơn hàng.</li>
+      </ol>
+      <div class="page-number">Trang 4 - 5</div>
+    </div>
+
+    <!-- PAGE 5: TƯ DUY ĐIỀU HÀNH & DAILY SOP -->
+    <div class="book-page">
+      <h3 class="section-header">IV. Tư duy điều hành & Nghệ thuật "ra lệnh" cho AI</h3>
+      <p>Sai lầm lớn nhất của người mới dùng AI là đưa ra câu lệnh quá ngắn gọn ("Viết bài bán áo đi"), dẫn đến kết quả trả về hời hợt, lan man. Hãy áp dụng quy trình 3 bước sau:</p>
+      <p><strong>1. Chuyển từ vị thế "Người làm" sang "Người kiểm duyệt (Editor)":</strong><br />
+      Bạn không tự viết từ dấu chấm đầu tiên. Bạn yêu cầu AI viết 3 đến 5 phương án khác nhau. Nhiệm vụ của bạn chỉ là đọc lướt, chọn ra phương án ưu tú nhất, sau đó thêm thắt cảm xúc thật, trải nghiệm cá nhân và văn phong đặc trưng của Coach Tống An vào đó.</p>
+      
+      <p><strong>2. Công thức tiêu chuẩn để ra lệnh cho AI (Prompt Framework):</strong></p>
+      <ul>
+        <li><strong>Vai trò (Role):</strong> Bạn muốn AI đóng vai ai? (Chuyên gia marketing, chuyên gia tâm lý phụ nữ...).</li>
+        <li><strong>Bối cảnh (Context):</strong> Tình hình kinh doanh hiện tại của bạn là gì? (Bán hàng vật lý, tệp khách hàng bận rộn...).</li>
+        <li><strong>Nhiệm vụ cụ thể (Task):</strong> Cần AI làm chính xác việc gì? (Viết bài, tạo kịch bản, lập bảng biểu...).</li>
+        <li><strong>Đầu ra mong muốn (Output):</strong> Hình thức trình bày ra sao? (Dài bao nhiêu chữ, văn phong thế nào, có cấu trúc AIDA không...).</li>
+      </ul>
+
+      <h3 class="section-header">V. Xây dựng quy trình làm việc hàng ngày (Daily SOP) của Solopreneur</h3>
+      <p>Lịch trình mẫu tối ưu một ngày của bạn khi đã có AI làm trợ lý:</p>
+      <ul>
+        <li><strong>🌅 Buổi sáng (08:00 - 10:00): Chiến lược & Sáng tạo cùng AI</strong><br />
+        08:00 - 08:30: Mở ChatGPT lên sẵn 3 ý tưởng video ngắn và 1 bài Facebook.<br />
+        08:30 - 09:15: Duyệt nội dung, dùng Canva AI tạo nhanh hình ảnh minh họa.<br />
+        09:15 - 10:00: Lên lịch tự động đăng tải lên Facebook, TikTok, Zalo.</li>
+        <li><strong>☀️ Buổi trưa & Chiều (10:00 - 16:00): Vận hành & Kinh doanh cốt lõi</strong><br />
+        Dành toàn bộ thời gian này cho việc sinh tiền trực tiếp: Xử lý đơn hàng, kiểm tra kho, đóng gói, livestream hoặc tư vấn gói đồng hành.</li>
+        <li><strong>🌆 Buổi tối (20:00 - 21:00): Tối ưu & Tổng kết</strong><br />
+        Dùng Notion AI xem lại báo cáo công việc trong ngày, lên kế hoạch mai, tắt máy khép lại ngày làm việc để tận hưởng cuộc sống bên gia đình.</li>
+      </ul>
+      <div class="page-number">Trang 6</div>
+    </div>
+
+    <!-- PAGE 6: CHƯƠNG 2: XÂY DỰNG THƯƠNG HIỆU CÁ NHÂN -->
+    <div class="book-page">
+      <h2 class="chapter-header">CHƯƠNG 2: XÂY DỰNG THƯƠNG HIỆU CÁ NHÂN ĐỂ BÁN HÀNG VẬT LÝ</h2>
+      <h3 class="section-header">I. Tư duy nền tảng — Tại sao bán hàng vật lý nhất định phải có thương hiệu cá nhân?</h3>
+      <p><strong>1. Cái bẫy "Cạnh tranh về giá" trên thị trường E-commerce:</strong><br />
+      Khi bạn bán sản phẩm vật lý (quần áo, mỹ phẩm, gia dụng...) mà chỉ dựa vào việc nhập hàng giá rẻ về bán lại, bạn sẽ rơi vào cuộc chiến "dìm giá" khốc liệt với hàng nghìn đối thủ. Khách hàng chỉ mua nơi nào rẻ hơn 5.000đ; biên độ lợi nhuận ngày càng mỏng trong khi chi phí quảng cáo ngày một tăng cao.</p>
+
+      <p><strong>2. Sức mạnh của "Nhân hiệu gắn liền với Sản phẩm vật lý":</strong><br />
+      Người ta có thể quên tên một cửa hàng online vô danh, nhưng người ta sẽ nhớ và tin tưởng một con người bằng xương bằng thịt đứng sau sản phẩm đó. Khi bạn xây dựng thương hiệu cá nhân (Personal Branding), bạn không chỉ bán một cái áo, mà đang bán sự uy tín, phong cách sống, giải pháp và niềm tin. Khách hàng mua vì tin yêu bạn, giá không còn là rào cản lớn nhất nữa.</p>
+
+      <h3 class="section-header">II. Xác định định vị và ngách sản phẩm vật lý độc quyền</h3>
+      <p><strong>Công thức 3 vòng tròn định vị cá nhân:</strong></p>
+      <ul>
+        <li>1. Bạn là ai? (Thế mạnh, phong cách sống: Phụ nữ độc lập, mẹ bỉm tinh tế...).</li>
+        <li>2. Khách hàng của bạn là ai? (Ai cần sản phẩm của bạn: Phụ nữ công sở bận rộn 25-40 tuổi...).</li>
+        <li>3. Sản phẩm vật lý nào giải quyết đúng nỗi đau của họ? (Thời trang thiết kế không nhăn, gia dụng thông minh...).</li>
+      </ul>
+
+      <h3 class="section-header">III. Công thức "Hook - Story - Offer" trong từng nội dung</h3>
+      <ul>
+        <li><strong>H - HOOK (3 giây đầu tiên):</strong> Ví dụ đúng: <em>"3 sai lầm khiến phụ nữ công sở luôn thấy mình không có gì để mặc mỗi sáng dù tủ quần áo chật ních."</em></li>
+        <li><strong>S - STORY (Kể chuyện & Chạm nỗi đau):</strong> Dùng câu chuyện thực tế của bản thân hoặc khách hàng cũ để minh chứng.</li>
+        <li><strong>O - OFFER (Lời kêu gọi hành động):</strong> Đưa ra ưu đãi rõ ràng kèm link giỏ hàng hoặc nhắn tin nhận mã giảm 20% cho 50 người đăng ký sớm nhất.</li>
+      </ul>
+      <div class="page-number">Trang 7 - 8</div>
+    </div>
+
+    <!-- PAGE 7: CHƯƠNG 3: BỘ PROMPT ĐỈNH CAO -->
+    <div class="book-page">
+      <h2 class="chapter-header">CHƯƠNG 3: BỘ PROMPT ĐỈNH CAO CHO E-COMMERCE & SOLOPRENEUR</h2>
+      <h3 class="section-header">I. Công thức "Bốn Mạch Vàng" (PRED Framework)</h3>
+      <p>Để AI biến thành một chuyên gia thực thụ phục vụ riêng cho doanh nghiệp 1 người của bạn, mỗi câu lệnh bạn nhập vào phải đủ 4 yếu tố sau:</p>
+      <ul>
+        <li><strong>P - Personas (Vai trò):</strong> Gán cho AI một vị trí chuyên gia cụ thể.</li>
+        <li><strong>R - Rule & Context (Quy tắc & Bối cảnh):</strong> Hoàn cảnh kinh doanh, khách hàng mục tiêu, quy tắc văn phong gần gũi.</li>
+        <li><strong>E - Execution Task (Nhiệm vụ cụ thể):</strong> Yêu cầu chính xác việc AI cần làm.</li>
+        <li><strong>D - Deliverable Format (Hình thức đầu ra):</strong> Cấu trúc gạch đầu dòng, giới hạn số từ.</li>
+      </ul>
+
+      <h3 class="section-header">II. Bộ Prompt Viết Content Bán Hàng AIDA (Facebook / Zalo)</h3>
+      <div class="prompt-box">
+        <div class="prompt-title">⚡ Prompt AIDA Bán Hàng E-commerce</div>
+        "Đóng vai trò là một Chuyên gia Copywriting hàng đầu về thương mại điện tử và xây dựng thương hiệu cá nhân. Hãy viết cho tôi một bài đăng Facebook dài theo cấu trúc AIDA để bán sản phẩm vật lý là [Điền tên sản phẩm, ví dụ: Áo sơ mi thiết kế chống nhăn cao cấp] dành cho đối tượng khách hàng mục tiêu là [Ví dụ: Phụ nữ công sở bận rộn từ 28-45 tuổi]. Yêu cầu chi tiết: - A (Attention): Tiêu đề mở đầu cực mạnh, chạm thẳng vào nỗi đau lớn nhất của họ (ví dụ: mất tự tin vì trang phục nhăn nhúm, không có thời gian ủi đồ mỗi sáng). - I (Interest): Kể một câu chuyện ngắn hoặc tình huống thực tế đồng cảm. - D (Desire): Nêu bật các tính năng ưu việt, chất liệu, lợi ích độc quyền của sản phẩm giúp họ giải quyết triệt để vấn đề. - A (Action): Kêu gọi hành động mạnh mẽ kèm ưu đãi giới hạn cho người mua sớm nhất. - Văn phong: Gần gũi, chân thành, sắc sảo và truyền cảm hứng đúng chất Coach Tống An."
+      </div>
+
+      <h3 class="section-header">III. Bộ Prompt Tạo Kịch Bản Video Ngắn Triệu View (TikTok / Reels / Shorts)</h3>
+      <div class="prompt-box">
+        <div class="prompt-title">⚡ Prompt Kịch Bản Video Ngắn</div>
+        "Đóng vai là một Nhà sáng tạo nội dung triệu view trên TikTok chuyên về mảng bán hàng vật lý. Hãy thiết kế cho tôi 3 ý tưởng kịch bản video ngắn (dưới 60 giây) cho sản phẩm [Điền tên sản phẩm của bạn]. Mỗi kịch bản bắt buộc phải tuân theo cấu trúc sau: 1. Hook (0 - 3 giây đầu): Câu nói hoặc hành động gây sốc, tò mò hoặc chạm đúng tử huyệt để giữ chân người xem không lướt đi. 2. Body (3 - 40 giây): Giải quyết vấn đề, demo trực quan tính năng ưu việt của sản phẩm một cách chân thực nhất. 3. Call-to-Action (10 giây cuối): Kêu gọi người xem bấm vào giỏ hàng hoặc nhắn tin để nhận ưu đãi ngay. Trình bày kết quả rõ ràng theo từng kịch bản, kèm theo gợi ý bối cảnh quay (Visual cue) cụ thể."
+      </div>
+      <div class="page-number">Trang 9 - 11</div>
+    </div>
+
+    <!-- PAGE 8: PROMPT XỬ LÝ TỪ CHỐI & KẾ HOẠCH 30 NGÀY -->
+    <div class="book-page">
+      <h3 class="section-header">IV. Bộ Prompt Xử Lý Từ Chối & Tạo Kịch Bản Chăm Sóc Khách Hàng (Chatbot / Inbox)</h3>
+      <div class="prompt-box">
+        <div class="prompt-title">⚡ Prompt Xử Lý Từ Chối Mua Hàng</div>
+        "Đóng vai là một Trưởng phòng Chăm sóc Khách hàng cao cấp, có kỹ năng thấu cảm và chốt đơn đỉnh cao. Hãy giúp tôi soạn 5 mẫu câu trả lời tin nhắn (Inbox template) để xử lý 5 lời từ chối phổ biến nhất của khách hàng khi mua sản phẩm vật lý [Điền tên sản phẩm]: 1. 'Sao giá cao thế/ Đắt thế em?' 2. 'Chị sợ mua online mặc không vừa size / không giống hình.' 3. 'Để chị suy nghĩ thêm rồi nhắn lại sau nhé.' 4. 'Phí ship cao quá, có được freeship không em?' 5. 'Sản phẩm này có gì khác biệt so với các shop khác?' Yêu cầu: Câu trả lời phải mềm mỏng, giải tỏa nỗi lo ngay lập tức, đồng thời khéo léo chốt đơn hoặc mời khách vào danh sách ưu đãi."
+      </div>
+
+      <h3 class="section-header">V. Bộ Prompt Lập Kế Hoạch Nội Dung 30 Ngày Cho Solopreneur</h3>
+      <div class="prompt-box">
+        <div class="prompt-title">⚡ Prompt Lập Kế Hoạch Content 30 Ngày</div>
+        "Đóng vai là một Giám đốc Chiến lược Marketing kỳ cựu. Hãy lập cho tôi một Bảng kế hoạch nội dung chi tiết 30 ngày trên mạng xã hội nhằm xây dựng thương hiệu cá nhân và bán sản phẩm vật lý [Điền tên sản phẩm của bạn] cho tệp khách hàng [Điền tệp khách hàng mục tiêu]. Yêu cầu cấu trúc đầu ra trình bày dưới dạng bảng gồm các cột: - Ngày (Từ Ngày 1 đến Ngày 30) - Giai đoạn phễu (Thu hút / Nuôi dưỡng / Bán hàng) - Chủ đề nội dung cụ thể (Topic) - Định dạng (Bài viết dài / Video ngắn / Livestream / Story) Đảm bảo tỷ lệ 80% nội dung giá trị/nhân hiệu và 20% nội dung bán hàng trực tiếp."
+      </div>
+      <div class="page-number">Trang 12</div>
+    </div>
+
+    <!-- PAGE 9: CHƯƠNG 4: CHECKLIST 90 NGÀY -->
+    <div class="book-page">
+      <h2 class="chapter-header">CHƯƠNG 4: CHECKLIST 90 NGÀY HÀNH ĐỘNG THỰC CHIẾN</h2>
+      <h3 class="section-header">I. Tổng quan lộ trình 90 ngày (3 Tháng)</h3>
+      <ul>
+        <li><strong>Tháng 1 (Ngày 1 - 30):</strong> Thiết lập nền tảng & Làm quen với hệ thống AI.</li>
+        <li><strong>Tháng 2 (Ngày 31 - 60):</strong> Tự động hóa, Phễu bán hàng & Tăng tốc tương tác.</li>
+        <li><strong>Tháng 3 (Ngày 61 - 90):</strong> Bứt phá doanh thu, Tối ưu chuyển đổi & Nhân bản quy mô.</li>
+      </ul>
+
+      <h3 class="section-header">II. Giai đoạn 1 (Ngày 1 - Ngày 30) — Thiết lập nền tảng & Tối ưu hồ sơ</h3>
+      <ul>
+        <li><strong>Tuần 1 (Ngày 1 - 7): Tối ưu hóa Hồ sơ & Chọn sản phẩm phễu</strong><br />
+        Ngày 1: Kiểm toán danh mục sản phẩm, chọn 1 sản phẩm chủ lực và 1 sản phẩm phễu.<br />
+        Ngày 2: Viết lại Bio cá nhân trên Facebook/TikTok chuẩn hóa chuyên gia.<br />
+        Ngày 3: Thay mới ảnh đại diện và ảnh bìa chuyên nghiệp, sắc nét.<br />
+        Ngày 4 - 5: Thiết lập không gian làm việc với AI (ChatGPT, Claude, Canva, Notion).<br />
+        Ngày 6 - 7: Dùng AI lập danh sách 30 chủ đề nội dung đầu tiên cho tháng.</li>
+        <li><strong>Tuần 2 & Tuần 3 (Ngày 8 - 21): Sản xuất chuỗi nội dung "Làm ấm" kênh</strong><br />
+        Mỗi ngày đăng 1 bài viết/video chia sẻ về câu chuyện cá nhân và giá trị cốt lõi; ứng dụng bộ Prompt review sản phẩm thực tế.</li>
+        <li><strong>Tuần 4 (Ngày 22 - 30): Thiết lập Phễu thu hút đầu tiên</strong><br />
+        Tạo quà tặng phễu (Ebook ngắn/Voucher ưu đãi độc quyền); kêu gọi vào nhóm Zalo gom tệp khách hàng tiềm năng đầu tiên.</li>
+      </ul>
+
+      <h3 class="section-header">III. Giai đoạn 2 (Ngày 31 - Ngày 60) — Tự động hóa & Vận hành phễu</h3>
+      <ul>
+        <li><strong>Tuần 5 (Ngày 31 - 37):</strong> Chuẩn hóa kịch bản chăm sóc & chốt đơn, tin nhắn chào mừng tự động.</li>
+        <li><strong>Tuần 6 & 7 (Ngày 38 - 51):</strong> Đẩy mạnh video ngắn Hook 3 giây & thực hiện các phiên Livestream bán hàng.</li>
+        <li><strong>Tuần 8 (Ngày 52 - 60):</strong> Tối ưu quy trình đóng gói & vận chuyển, rà soát nội dung chuyển đổi cao nhất.</li>
+      </ul>
+
+      <h3 class="section-header">IV. Giai đoạn 3 (Ngày 61 - Ngày 90) — Bứt phá doanh thu & Tối ưu hệ thống</h3>
+      <ul>
+        <li><strong>Tuần 9 & 10 (Ngày 61 - 74):</strong> Chiến dịch Bùng nổ Doanh số (Sales Campaign: Flash Sale, ưu đãi cho khách cũ).</li>
+        <li><strong>Tuần 11 (Ngày 75 - 81):</strong> Tối ưu hóa & nhân bản top 5 video/bài viết đem lại nhiều đơn hàng nhất.</li>
+        <li><strong>Tuần 12 (Ngày 82 - 90):</strong> Hoàn tất đối soát tài chính, đóng gói SOP lên Notion và chuẩn bị chu kỳ mới.</li>
+      </ul>
+      <div class="page-number">Trang 13 - 15</div>
+    </div>
+
+    <!-- PAGE 10: PHỤ LỤC & BẢNG GOOGLE SHEETS MASTER -->
+    <div class="book-page">
+      <h2 class="chapter-header">PHỤ LỤC: 90-DAY SOLOPRENEUR MASTER SYSTEM</h2>
+      <h3 class="section-header">Liên kết Google Sheets trực tiếp từ Coach Tống An</h3>
+      <p>Để tiện cho việc theo dõi tiến độ hàng ngày mà không cần vẽ lại từ đầu, tác giả đã tích hợp sẵn 2 bảng tính Google Sheets mẫu:</p>
+      
+      <div class="callout" style="background: #F0F7FF; border-left-color: #0068FF;">
+        <h4 style="color: #0068FF; margin-bottom: 8px;">🔗 File Google Sheets 1: Workspace 90-Day Master System</h4>
+        <p style="margin-bottom: 8px;">Bảng quản lý công việc hàng ngày gồm các cột Task, AI Tool Used, Status, Notes:</p>
+        <a href="https://docs.google.com/spreadsheets/d/1fdV5WQpuOzy6bXDy2eerwwpvZBdJbVpHOpsKwhAFHMw/edit?gid=2127812128#gid=2127812128" target="_blank" style="color: #0068FF; font-weight: bold; word-break: break-all;">
+          https://docs.google.com/spreadsheets/d/1fdV5WQpuOzy6bXDy2eerwwpvZBdJbVpHOpsKwhAFHMw/edit?gid=2127812128#gid=2127812128
+        </a>
+      </div>
+
+      <div class="callout" style="background: #F0FFF4; border-left-color: #0F9D58;">
+        <h4 style="color: #0F9D58; margin-bottom: 8px;">🔗 File Google Sheets 2: Lộ Trình 90 Ngày Chi Tiết</h4>
+        <p style="margin-bottom: 8px;">Checklist chi tiết từng ngày từ Day 1 đến Day 90 phân theo giai đoạn phễu:</p>
+        <a href="https://docs.google.com/spreadsheets/d/1stK_-SH6Vvg6ASZnrWZ3TPLWIy3evsMrF0SqCgB0Gxo/edit?gid=301116931#gid=301116931" target="_blank" style="color: #0F9D58; font-weight: bold; word-break: break-all;">
+          https://docs.google.com/spreadsheets/d/1stK_-SH6Vvg6ASZnrWZ3TPLWIy3evsMrF0SqCgB0Gxo/edit?gid=301116931#gid=301116931
+        </a>
+      </div>
+
+      <h3 class="section-header">Trích dẫn Bảng Quản Lý Công Việc Mẫu (Kanban / Table View)</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Task (Công việc)</th>
+              <th>AI Assistant</th>
+              <th>Status</th>
+              <th>Notes (Ghi chú)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1.1 Tối ưu hồ sơ cá nhân và định vị</td>
+              <td>ChatGPT / Canva</td>
+              <td>✅ Đã hoàn thành</td>
+              <td>Xác định rõ chân dung khách hàng và thông điệp cốt lõi.</td>
+            </tr>
+            <tr>
+              <td>1.2 Chọn sản phẩm chủ lực và phễu</td>
+              <td>ChatGPT / Notion AI</td>
+              <td>✅ Đã hoàn thành</td>
+              <td>Chọn sản phẩm mồi câu, sản phẩm chính và combo.</td>
+            </tr>
+            <tr>
+              <td>1.3 Cài đặt bộ công cụ AI cơ bản</td>
+              <td>ChatGPT / Canva</td>
+              <td>⏳ Đang làm</td>
+              <td>Kết nối công cụ tạo nội dung hàng ngày.</td>
+            </tr>
+            <tr>
+              <td>2.1 Xây dựng kịch bản AI chăm sóc</td>
+              <td>ChatGPT</td>
+              <td>⏳ Đang làm</td>
+              <td>Thiết lập luồng tin nhắn tự động chăm sóc khách.</td>
+            </tr>
+            <tr>
+              <td>2.2 Lên lịch Livestream & Video ngắn</td>
+              <td>Canva / ChatGPT</td>
+              <td>⏳ Đang làm</td>
+              <td>Chuẩn hóa bộ khung kịch bản video ngắn thu hút.</td>
+            </tr>
+            <tr>
+              <td>2.3 Quản lý quy trình vận hành SOP</td>
+              <td>Notion AI</td>
+              <td>🔄 Cần tối ưu</td>
+              <td>Số hóa các bước chăm sóc và chốt đơn để dễ nhân bản.</td>
+            </tr>
+            <tr>
+              <td>3.1 Triển khai chiến dịch Sales lớn</td>
+              <td>ChatGPT</td>
+              <td>⏳ Đang làm</td>
+              <td>Lên kế hoạch ưu đãi và kịch bản chốt sale dồn dập.</td>
+            </tr>
+            <tr>
+              <td>3.2 Tối ưu lợi nhuận ròng & chuyển đổi</td>
+              <td>ChatGPT</td>
+              <td>🔄 Cần tối ưu</td>
+              <td>Phân tích chỉ số ROI của từng kênh và phễu bán hàng.</td>
+            </tr>
+            <tr>
+              <td>3.3 Nhân bản hệ thống & bàn giao quy trình</td>
+              <td>Notion AI</td>
+              <td>⏳ Đang làm</td>
+              <td>Đóng gói mô hình thành cẩm nang hướng dẫn cho đội ngũ.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout" style="background: #FBEAEA; border-left-color: var(--primary); text-align: center;">
+        <h4 style="color: var(--primary);">KẾT NỐI VÀ NHẬN HỖ TRỢ TRỰC TIẾP TỪ COACH TỐNG AN</h4>
+        <p style="margin-top: 8px; font-size: 13px;">
+          Tham gia nhóm Zalo học viên để được giải đáp thắc mắc, sửa kịch bản và nhận thêm các tài liệu cập nhật miễn phí trọn đời:
+        </p>
+        <p style="margin-top: 6px;">
+          <a href="https://zalo.me/g/fsuvf5aok5adpz7krl1b" target="_blank" style="color: var(--primary); font-weight: 800; font-size: 14px;">
+            👉 Bấm Vào Đây Để Tham Gia Nhóm Zalo Hỗ Trợ Trọn Đời
+          </a>
+        </p>
+      </div>
+
+      <div class="page-number">Trang 16 - 38 (Bản Full Ebook 38 Trang)</div>
+    </div>
+
+  </div>
+
+</body>
+</html>

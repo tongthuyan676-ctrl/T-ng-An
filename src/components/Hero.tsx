@@ -4,7 +4,7 @@
  */
 
 import { useState, ChangeEvent } from 'react';
-import { ArrowRight, Gift, Sparkles } from 'lucide-react';
+import { ArrowRight, Gift, Sparkles, BookOpen } from 'lucide-react';
 import { motion } from 'motion/react';
 
 interface HeroProps {
@@ -98,38 +98,38 @@ export default function Hero({ onScrollTo }: HeroProps) {
               </p>
             </motion.div>
 
-            {/* Outstanding Gift Banner right inside Hero */}
+            {/* Outstanding Ebook 59K Banner right inside Hero */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.15 }}
-              onClick={() => onScrollTo('qua-tang')}
+              onClick={() => onScrollTo('ebook')}
               className="bg-white/90 backdrop-blur-xs border-2 border-[#C59B27] rounded-3xl p-5 shadow-lg flex flex-col sm:flex-row items-center gap-4 cursor-pointer hover:bg-white hover:shadow-xl hover:-translate-y-0.5 transition-all group border-dashed relative overflow-hidden text-left"
             >
               {/* Highlight ribbon */}
               <div className="absolute top-0 right-0 bg-[#A82222] text-white text-[9px] font-black px-3 py-1 rounded-bl-2xl uppercase tracking-wider animate-pulse shadow-sm z-10">
-                QUÀ TẶNG ĐỘC QUYỀN
+                ẤN PHẨM MỚI 59K
               </div>
               <div className="w-14 h-14 rounded-2xl bg-[#FBEAEA] flex items-center justify-center shrink-0 border border-[#F5CACA] group-hover:scale-110 transition-transform shadow-inner">
-                <Gift className="w-7 h-7 text-[#A82222] animate-bounce" />
+                <BookOpen className="w-7 h-7 text-[#A82222] animate-bounce" />
               </div>
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-1">
-                  <span className="text-[10px] font-black text-[#C59B27] uppercase tracking-widest bg-[#F3ECE0] px-2.5 py-0.5 rounded-full">TẶNG MIỄN PHÍ TRỊ GIÁ 499K</span>
+                  <span className="text-[10px] font-black text-[#C59B27] uppercase tracking-widest bg-[#F3ECE0] px-2.5 py-0.5 rounded-full">ƯU ĐÃI ĐẶC BIỆT CHỈ 59K</span>
                   <span className="relative flex h-2 w-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                   </span>
                 </div>
                 <h4 className="text-base sm:text-lg font-black text-[#2E2522] group-hover:text-[#A82222] transition-colors leading-tight">
-                  Bộ 2 Siêu Tài Liệu Xây Kênh Chuyển Đổi & Ứng Dụng AI Đột Phá!
+                  Cẩm Nang Thực Chiến: Vận Hành Doanh Nghiệp 1 Người Bằng AI
                 </h4>
                 <p className="text-xs text-[#5C4D49] font-medium mt-1">
-                  Tải ngay quy trình 10 bước & 9 nguyên tắc vàng giúp tự động hóa 80% thời gian sáng tạo nội dung của chị.
+                  Tự động hóa 80% công việc cho nhà bán hàng vật lý + Bản đọc thử + Checklist 90 Ngày thực chiến.
                 </p>
               </div>
               <div className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-[#A82222] group-hover:bg-[#8B1A1A] text-white text-xs font-black rounded-xl transition-all shadow-sm shrink-0 mt-2 sm:mt-0">
-                <span>Nhận ngay</span>
+                <span>Nhận ngay 59K</span>
                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
               </div>
             </motion.div>
@@ -155,6 +155,14 @@ export default function Hero({ onScrollTo }: HeroProps) {
                 </div>
               </button>
               
+              <button
+                onClick={() => onScrollTo('ebook')}
+                className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-4 rounded-full bg-[#FFFDF9] text-[#A82222] hover:bg-[#FBEAEA] border-2 border-[#C59B27] hover:border-[#A82222] transition-all duration-300 text-base font-bold shadow-sm hover:shadow-md hover:-translate-y-0.5 cursor-pointer group gap-1.5"
+              >
+                <Sparkles className="w-4 h-4 text-[#C59B27] group-hover:rotate-12 transition-transform" />
+                <span>Ebook Solopreneur AI 59K</span>
+              </button>
+
               <button
                 onClick={() => onScrollTo('qua-tang')}
                 className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 rounded-full bg-white text-[#5C4D49] hover:text-[#C59B27] border-2 border-[#EADFC9] hover:border-[#C59B27] transition-all duration-300 text-base font-semibold shadow-sm hover:shadow-md hover:-translate-y-0.5 cursor-pointer group"

@@ -28,8 +28,9 @@ export default function Header({ onScrollTo }: HeaderProps) {
 
   const menuItems = [
     { label: 'Về An', target: 've-an' },
-    { label: 'Ebook', target: 'ebook' },
+    { label: 'Ebook 59K 🔥', target: 'ebook' },
     { label: 'Khóa học', target: 'courses' },
+    { label: 'Xây Kênh', target: 'xay-kenh' },
     { label: 'Hợp tác doanh nghiệp', target: 'enterprise' },
     { label: 'Quà tặng', target: 'qua-tang' },
     { label: 'Liên hệ', target: 'lien-he' },

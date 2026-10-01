@@ -252,7 +252,7 @@ export const SOCIAL_CHANNELS: SocialChannel[] = [
   {
     name: 'Cộng đồng Zalo',
     platform: 'zalo',
-    url: 'https://zalo.me/g/kkgpy7a04itz12cfceo5',
+    url: 'https://zalo.me/g/fsuvf5aok5adpz7krl1b',
     handle: 'Nhóm Hỗ Trợ Xây Kênh',
     description: 'Nơi giao lưu học hỏi, thảo luận kịch bản và nhận quà tặng tài liệu từ An hằng ngày.'
   },

@@ -653,7 +653,7 @@ export default function Courses() {
                         Tham gia nhóm Zalo kết nối trực tiếp với Tống An và các thành viên cùng khóa học để cùng nhau thảo luận, đặt câu hỏi, chữa bài và nhận cập nhật nội dung mới.
                       </p>
                       <a
-                        href={selectedCourse.zaloUrl || "https://zalo.me/g/woxpkyg1pthofcehbo7m"}
+                        href={selectedCourse.zaloUrl || "https://zalo.me/g/fsuvf5aok5adpz7krl1b"}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 bg-[#0068FF] hover:bg-[#0052CC] text-white font-bold text-xs rounded-xl shadow-md transition-all cursor-pointer"
